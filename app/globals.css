@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ---- Semantic surfaces ---- */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --muted: 204 25% 97%;
+    --muted-foreground: 215 16% 47%;
+    --border: 205 22% 91%;
+    --input: 205 22% 91%;
+    --ring: 80 100% 29%;
+
+    /* ---- Brand semantic mapping ---- */
+    --primary: 80 100% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 90% 31%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 76 100% 33%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 49% 43%;
+    --destructive-foreground: 0 0% 98%;
+
+    --radius: 0.625rem;
+
+    /* ---- Chart ---- */
+    --chart-1: 80 100% 29%;
+    --chart-2: 213 90% 31%;
+    --chart-3: 38 100% 47%;
+    --chart-4: 0 49% 43%;
+    --chart-5: 127 57% 36%;
+
+    /* ---- Brand raw tokens (HSL) ---- */
+    --cube-navy: 219 100% 12%;
+    --cube-green: 80 100% 29%;
+    --cube-green-bright: 76 100% 33%;
+    --cube-green-dark: 82 100% 29%;
+    --cube-blue: 213 90% 31%;
+    --cube-soft: 204 25% 97%;
+    --cube-amber: 38 100% 47%;
+    --cube-red: 0 49% 43%;
+    --cube-success: 127 57% 36%;
+
+    /* ---- Semantic aliases ---- */
+    --brand-navy: var(--cube-navy);
+    --brand-blue: var(--cube-blue);
+    --brand-green: var(--cube-green);
+    --brand-green-bright: var(--cube-green-bright);
+    --brand-green-dark: var(--cube-green-dark);
+    --background-soft: var(--cube-soft);
+    --surface: 0 0% 100%;
+    --surface-muted: var(--cube-soft);
+    --text-primary: 222 47% 11%;
+    --text-secondary: 215 16% 47%;
+    --text-inverse: 0 0% 100%;
+    --border-strong: 205 15% 80%;
+    --success: var(--cube-success);
+    --warning: var(--cube-amber);
+    --critical: var(--cube-red);
+    --information: var(--cube-blue);
+
+    /* ---- Shadows ---- */
+    --shadow-subtle: 0 1px 2px 0 rgb(0 22 62 / 0.04);
+    --shadow-card: 0 1px 3px 0 rgb(0 22 62 / 0.06), 0 1px 2px -1px rgb(0 22 62 / 0.05);
+    --shadow-hover: 0 4px 12px -2px rgb(0 22 62 / 0.10), 0 2px 6px -2px rgb(0 22 62 / 0.06);
+    --shadow-overlay: 0 12px 32px -4px rgb(0 22 62 / 0.16), 0 4px 12px -2px rgb(0 22 62 / 0.08);
+
+    /* ---- Radii ---- */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+  }
+
+  .dark {
+    --background: 219 100% 8%;
+    --foreground: 0 0% 98%;
+    --card: 219 60% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 219 60% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 80 100% 33%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 90% 31%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 219 40% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 80 100% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 219 40% 22%;
+    --input: 219 40% 22%;
+    --ring: 80 100% 33%;
+    --surface: 219 60% 14%;
+    --surface-muted: 219 40% 18%;
+    --text-primary: 0 0% 98%;
+    --text-secondary: 215 20% 65%;
+    --text-inverse: 222 47% 11%;
+    --border-strong: 219 30% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cube-soft text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight text-cube-navy;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-cube-green ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  .cube-grid-bg {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .cube-grid-fade {
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  }
+  .hexagon-clip {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+  .shadow-subtle { box-shadow: var(--shadow-subtle); }
+  .shadow-card   { box-shadow: var(--shadow-card); }
+  .shadow-hover  { box-shadow: var(--shadow-hover); }
+  .shadow-overlay{ box-shadow: var(--shadow-overlay); }
+
+  .text-display {
+    font-size: clamp(2.375rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .text-h1 {
+    font-size: clamp(2.125rem, 4vw, 3.5rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .text-h2 {
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .text-h3 {
+    font-size: clamp(1.625rem, 2vw, 2rem);
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  .text-h4 {
+    font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .text-body-lg {
+    font-size: clamp(1.0625rem, 1.2vw, 1.25rem);
+    line-height: 1.6;
+  }
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.625;
+  }
+  .text-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .text-caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  .text-eyebrow {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .text-label {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .max-w-narrow { max-width: 760px; }
+  .max-w-standard { max-width: 1280px; }
+  .max-w-wide { max-width: 1440px; }
+  .section-lg { @apply py-12 md:py-16 lg:py-24; }
+  .section-standard { @apply py-10 md:py-14 lg:py-20; }
+  .section-compact { @apply py-8 md:py-12 lg:py-16; }
+}
