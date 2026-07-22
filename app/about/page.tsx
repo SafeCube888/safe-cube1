@@ -4,8 +4,9 @@ import { Eyebrow, SectionDivider, SectionHeading, SectionIntro } from '@/compone
 import { Container, ThreeColumnGrid } from '@/components/ui/layout';
 import { ValueCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Button } from '@/components/ui/button';
+import { PageHero, ImageTextSection, VisualFeatureGrid } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'About SAFE CUBE | Practical Workplace Improvement Partner',
@@ -39,30 +40,33 @@ const differences = [
 export default function AboutPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+        eyebrow="ABOUT SAFE CUBE"
         title="About SAFE CUBE"
         description="SAFE CUBE is a workplace improvement and QHSE support company that helps businesses protect people, identify risks, improve operational systems, strengthen compliance, and build sustainable workplace practices."
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'CONTACT US', href: '/contact' }}
+        image={pageImages.aboutHero}
+        imageAlt={pageImages.aboutHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Who We Are */}
-      <section className="section-standard bg-white">
-        <Container width="narrow">
-          <Eyebrow className="text-cube-green">WHO WE ARE</Eyebrow>
-          <SectionHeading className="mt-3" as="h2">Who We Are</SectionHeading>
-          <div className="mt-4 space-y-4">
-            <p className="text-body-lg text-muted-foreground">
-              SAFE CUBE is a workplace improvement and QHSE support company. We help businesses protect people, identify risks, improve operational systems, strengthen compliance, and build sustainable workplace practices.
-            </p>
-            <p className="text-body-lg text-muted-foreground">
-              We work with businesses across multiple industries, from small operations to larger organizations, providing practical assessment, advisory, training, documentation, and implementation support. Our approach is built around real workplace conditions, not theoretical frameworks that look good on paper but fail in practice.
-            </p>
-            <p className="text-body-lg text-muted-foreground">
-              We believe that safety, quality, and compliance are not separate activities. They are connected parts of a well-run business. When a workplace is safe, organized, and documented, it performs better, serves customers better, and is better prepared for inspections, audits, and growth.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <ImageTextSection
+        eyebrow="WHO WE ARE"
+        heading="Who We Are"
+        paragraphs={[
+          'SAFE CUBE is a workplace improvement and QHSE support company. We help businesses protect people, identify risks, improve operational systems, strengthen compliance, and build sustainable workplace practices.',
+          'We work with businesses across multiple industries, from small operations to larger organizations, providing practical assessment, advisory, training, documentation, and implementation support. Our approach is built around real workplace conditions, not theoretical frameworks that look good on paper but fail in practice.',
+          'We believe that safety, quality, and compliance are not separate activities. They are connected parts of a well-run business. When a workplace is safe, organized, and documented, it performs better, serves customers better, and is better prepared for inspections, audits, and growth.',
+        ]}
+        image={pageImages.aboutHero}
+        imageAlt={pageImages.aboutHeroAlt}
+        imagePosition="right"
+        background="white"
+      />
 
       {/* Why SAFE CUBE Exists */}
       <section className="section-standard bg-cube-soft">
@@ -113,25 +117,13 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-standard bg-cube-soft">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">OUR VALUES</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">What We Stand For</SectionHeading>
-          </div>
-          <ThreeColumnGrid>
-            {values.map((value) => (
-              <ValueCard
-                key={value.title}
-                icon={value.icon}
-                title={value.title}
-                description={value.description}
-                color="green"
-              />
-            ))}
-          </ThreeColumnGrid>
-        </Container>
-      </section>
+      <VisualFeatureGrid
+        eyebrow="OUR VALUES"
+        heading="What We Stand For"
+        items={values.map((v) => ({ icon: v.icon, title: v.title, description: v.description }))}
+        columns={3}
+        background="soft"
+      />
 
       {/* What Makes SAFE CUBE Different */}
       <section className="section-standard bg-white">

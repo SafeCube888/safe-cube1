@@ -2,7 +2,8 @@
 import { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { Container } from '@/components/ui/layout';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 const glossaryTerms: { term: string; definition: string }[] = [
   { term: 'Audit', definition: 'A systematic, independent, and documented process for obtaining evidence and evaluating it objectively to determine the extent to which audit criteria are fulfilled.' },
@@ -55,10 +56,15 @@ export default function GlossaryPage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Knowledge Centre', href: '/knowledge-centre' }, { label: 'Glossary' }]}
+        eyebrow="GLOSSARY"
         title="Workplace Safety Glossary"
-        description="Clear explanations of common QHSE, safety, compliance, and management-system terms."
+        description="Clear explanations of common QHSE, safety, compliance, and management-system terms used in workplace assessments, audits, and improvement plans."
+        image={pageImages.knowledgeCentreHero}
+        imageAlt={pageImages.knowledgeCentreHeroAlt}
+        variant="compact"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

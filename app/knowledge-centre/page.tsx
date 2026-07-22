@@ -5,11 +5,12 @@ import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typograph
 import { Container, ThreeColumnGrid } from '@/components/ui/layout';
 import { ArticleCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Button } from '@/components/ui/button';
 import { NewsletterForm } from '@/components/ui/newsletter-form';
+import { PageHero } from '@/components/ui/visual-sections';
 import { articles } from '@/content/articles';
 import { downloads } from '@/content/downloads';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'Knowledge Centre | SAFE CUBE',
@@ -31,10 +32,17 @@ export default function KnowledgeCentrePage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Knowledge Centre' }]}
+        eyebrow="KNOWLEDGE CENTRE"
         title="Practical Knowledge for Safer, Stronger Workplaces"
         description="Explore straightforward guidance, checklists, explanations, and workplace improvement resources created for business owners, managers, supervisors, and employees."
+        primaryCta={{ label: 'BROWSE ARTICLES', href: '/knowledge-centre/articles' }}
+        secondaryCta={{ label: 'VIEW DOWNLOADS', href: '/knowledge-centre/downloads' }}
+        image={pageImages.knowledgeCentreHero}
+        imageAlt={pageImages.knowledgeCentreHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Content Categories */}

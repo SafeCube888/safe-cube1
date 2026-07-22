@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Eyebrow, SectionHeading } from '@/components/ui/typography';
 import { Container, Section, ThreeColumnGrid } from '@/components/ui/layout';
 import { PlanCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
+import { PageHero, ImprovementCycle, VisualChecklist } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'CUBE CARE | Ongoing QHSE and Compliance Support',
@@ -31,14 +32,17 @@ const whatItMayInclude: string[] = [
 export default function CubeCarePage() {
   return (
     <>
-      <InternalPageHero
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Solutions', href: '/solutions' },
-          { label: 'CUBE CARE' },
-        ]}
+      <PageHero
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'CUBE CARE' }]}
+        eyebrow="ONGOING SUPPORT"
         title="CUBE CARE"
         description="Improvement Should Continue After the Report."
+        primaryCta={{ label: 'REQUEST A PROPOSAL', href: '/contact?service=cube-care' }}
+        secondaryCta={{ label: 'BOOK A CONSULTATION', href: '/book-consultation' }}
+        image={pageImages.cubeCareHero}
+        imageAlt={pageImages.cubeCareHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Section 1 - The Problem After Reports */}
@@ -68,20 +72,16 @@ export default function CubeCarePage() {
       {/* Section 2 - What CUBE CARE May Include */}
       <Section spacing="lg" background="soft">
         <Container>
-          <Eyebrow>WHAT IT MAY INCLUDE</Eyebrow>
-          <SectionHeading className="mt-3">
-            What CUBE CARE May Include
-          </SectionHeading>
-          <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-2">
-            {whatItMayInclude.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-cube-green/10">
-                  <Check className="h-3.5 w-3.5 text-cube-green" />
-                </span>
-                <span className="text-body text-cube-navy">{item}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="mb-8 text-center">
+            <Eyebrow>WHAT IT MAY INCLUDE</Eyebrow>
+            <SectionHeading className="mt-3">What CUBE CARE May Include</SectionHeading>
+          </div>
+          <div className="mx-auto max-w-3xl">
+            <VisualChecklist items={whatItMayInclude.map((item) => ({ text: item, type: 'green' }))} />
+          </div>
+          <div className="mt-12">
+            <ImprovementCycle />
+          </div>
         </Container>
       </Section>
 

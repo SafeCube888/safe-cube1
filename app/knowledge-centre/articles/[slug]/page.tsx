@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { articles } from '@/content/articles';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { Container } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { Eyebrow } from '@/components/ui/typography';
@@ -46,15 +47,20 @@ export default function ArticleDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[
           { label: 'Home', href: '/' },
           { label: 'Knowledge Centre', href: '/knowledge-centre' },
           { label: 'Articles', href: '/knowledge-centre/articles' },
           { label: article.title },
         ]}
+        eyebrow={categoryLabel}
         title={article.title}
         description={article.excerpt}
+        image={pageImages.knowledgeCentreHero}
+        imageAlt={pageImages.knowledgeCentreHeroAlt}
+        variant="banner"
+        theme="navy"
       />
 
       <section className="section-standard bg-white">

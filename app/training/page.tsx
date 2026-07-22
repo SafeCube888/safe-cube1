@@ -5,7 +5,8 @@ import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typograph
 import { Container } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { TextInput, EmailInput, PhoneInput, TextAreaField, SelectField, ConsentCheckbox, FormSectionHeading } from '@/components/ui/forms';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { CTADark } from '@/components/ui/cta';
 import { trainingPrograms } from '@/content/training';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
@@ -47,14 +48,17 @@ export default function TrainingPage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Training' }]}
+        eyebrow="PRACTICAL WORKPLACE TRAINING"
         title="SAFE CUBE Training"
         description="Practical Training for Safer Everyday Decisions."
-        primaryLabel="REQUEST TRAINING"
-        primaryHref="#training-form"
-        secondaryLabel="TALK TO SAFE CUBE"
-        secondaryHref="/contact"
+        primaryCta={{ label: 'REQUEST TRAINING', href: '#training-form' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.trainingHero}
+        imageAlt={pageImages.trainingHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Intro */}

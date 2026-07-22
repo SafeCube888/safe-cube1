@@ -3,7 +3,8 @@ import { useState, useMemo } from 'react';
 import { Search, FileText } from 'lucide-react';
 import { Container } from '@/components/ui/layout';
 import { ArticleCard } from '@/components/ui/cards';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { articles } from '@/content/articles';
 
 const categoryLabels: Record<string, string> = {
@@ -40,10 +41,15 @@ export default function ArticlesListingPage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Knowledge Centre', href: '/knowledge-centre' }, { label: 'Articles' }]}
+        eyebrow="ARTICLES"
         title="Articles"
         description="Explore practical guidance, explanations, and workplace improvement resources from SAFE CUBE."
+        image={pageImages.knowledgeCentreHero}
+        imageAlt={pageImages.knowledgeCentreHeroAlt}
+        variant="compact"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

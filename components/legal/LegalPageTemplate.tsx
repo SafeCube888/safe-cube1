@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 import { Container } from '@/components/ui/layout';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
 
 export interface LegalPageSection {
   heading: string;
@@ -18,10 +18,12 @@ export interface LegalPageTemplateProps {
 export function LegalPageTemplate({ title, description, sections, lastUpdated }: LegalPageTemplateProps) {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: title }]}
         title={title}
         description={description}
+        variant="compact"
+        theme="light"
       />
 
       {/* Development notice */}

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container } from '@/components/ui/layout';
-import { ProcessStepCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
+import { PageHero, VisualChecklist, ProcessTimeline, ContentCallout } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'SAFE SNAP | Quick Workplace Observation by SAFE CUBE',
@@ -95,35 +95,28 @@ function CheckList({ items }: { items: string[] }) {
 export default function SafeSnapPage() {
   return (
     <>
-      <InternalPageHero
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Solutions', href: '/solutions' },
-          { label: 'SAFE SNAP' },
-        ]}
+      <PageHero
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'SAFE SNAP' }]}
+        eyebrow="QUICK WORKPLACE OBSERVATION"
         title="SAFE SNAP"
         description="A Quick Professional Look at Your Workplace."
-        primaryLabel="REQUEST SAFE SNAP"
-        primaryHref="/contact?service=safe-snap"
-        secondaryLabel="EXPLORE CUBE INSIGHT"
-        secondaryHref="/solutions/cube-insight"
+        primaryCta={{ label: 'REQUEST SAFE SNAP', href: '/contact?service=safe-snap' }}
+        secondaryCta={{ label: 'EXPLORE CUBE INSIGHT', href: '/solutions/cube-insight' }}
+        image={pageImages.safeSnapHero}
+        imageAlt={pageImages.safeSnapHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Section 1 - Who It Is For */}
       <section className="section-standard bg-white">
         <Container width="narrow">
           <Eyebrow className="text-cube-green">WHO IT IS FOR</Eyebrow>
-          <SectionHeading className="mt-3" as="h2">
-            Who SAFE SNAP Is For
-          </SectionHeading>
+          <SectionHeading className="mt-3" as="h2">Who SAFE SNAP Is For</SectionHeading>
           <SectionIntro className="mt-4" align="left">
-            SAFE SNAP is designed for businesses that want a quick, professional observation of
-            their workplace without committing to a full detailed assessment. It is suitable for
-            organizations that are starting to think about workplace safety, those that want a
-            fresh perspective on visible hazards, or those that need a quick check before a client
-            visit, inspection, or operational change.
+            SAFE SNAP is designed for businesses that want a quick, professional observation of their workplace without committing to a full detailed assessment.
           </SectionIntro>
-          <CheckList items={whoItIsFor} />
+          <VisualChecklist items={whoItIsFor.map((item) => ({ text: item, type: 'green' }))} title="Suitable For" />
         </Container>
       </section>
 
@@ -131,15 +124,11 @@ export default function SafeSnapPage() {
       <section className="section-standard bg-cube-soft">
         <Container width="narrow">
           <Eyebrow className="text-cube-green">WHAT WE LOOK AT</Eyebrow>
-          <SectionHeading className="mt-3" as="h2">
-            What We Look At
-          </SectionHeading>
+          <SectionHeading className="mt-3" as="h2">What We Look At</SectionHeading>
           <SectionIntro className="mt-4" align="left">
-            During a SAFE SNAP visit, we focus on visible conditions, immediate hazards, and
-            priority areas. The observation is high-level and does not include detailed
-            documentation review, risk assessment, or corrective action planning.
+            During a SAFE SNAP visit, we focus on visible conditions, immediate hazards, and priority areas.
           </SectionIntro>
-          <CheckList items={whatWeLookAt} />
+          <VisualChecklist items={whatWeLookAt.map((item) => ({ text: item, type: 'amber' }))} title="Observation Areas" />
         </Container>
       </section>
 
@@ -169,52 +158,28 @@ export default function SafeSnapPage() {
       <section className="section-standard bg-cube-soft">
         <Container width="narrow">
           <Eyebrow className="text-cube-green">IMPORTANT TO KNOW</Eyebrow>
-          <SectionHeading className="mt-3" as="h2">
-            What SAFE SNAP Is Not
-          </SectionHeading>
+          <SectionHeading className="mt-3" as="h2">What SAFE SNAP Is Not</SectionHeading>
           <SectionIntro className="mt-4" align="left">
-            SAFE SNAP is a quick observation, not a detailed assessment. It does not include
-            documented findings, risk ratings, corrective action plans, or a structured
-            improvement roadmap. It does not replace a detailed inspection, statutory audit,
-            certification audit, or technical assessment. For a comprehensive evaluation, consider{' '}
-            <a
-              href="/solutions/cube-insight"
-              className="font-medium text-cube-green underline-offset-4 hover:underline"
-            >
-              CUBE INSIGHT
-            </a>
-            .
+            SAFE SNAP is a quick observation, not a detailed assessment. For a comprehensive evaluation, consider <a href="/solutions/cube-insight" className="font-medium text-cube-green underline-offset-4 hover:underline">CUBE INSIGHT</a>.
           </SectionIntro>
-          <CheckList items={whatItIsNot} />
+          <ContentCallout type="warning" title="Limitations">
+            <ul className="mt-2 space-y-1">
+              {whatItIsNot.map((item) => (
+                <li key={item} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-cube-amber" aria-hidden="true" /><span>{item}</span></li>
+              ))}
+            </ul>
+          </ContentCallout>
         </Container>
       </section>
 
       {/* Section 5 - Five-Step Process */}
-      <section className="section-standard bg-white">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">THE PROCESS</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">
-              How SAFE SNAP Works
-            </SectionHeading>
-            <SectionIntro className="mt-4">
-              A simple five-step process from request to recommendation, designed to keep things
-              quick, focused, and practical.
-            </SectionIntro>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {processSteps.map((step) => (
-              <ProcessStepCard
-                key={step.step}
-                step={step.step}
-                icon={step.icon}
-                title={step.title}
-                description={step.description}
-              />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ProcessTimeline
+        eyebrow="THE PROCESS"
+        heading="How SAFE SNAP Works"
+        intro="A simple five-step process from request to recommendation, designed to keep things quick, focused, and practical."
+        steps={processSteps.map((s) => ({ title: s.title, description: s.description, icon: s.step === 1 ? 'search' : s.step === 2 ? 'calendar' : s.step === 3 ? 'inspection' : s.step === 4 ? 'reports' : 'check' }))}
+        background="white"
+      />
 
       {/* Final CTA */}
       <section className="section-standard bg-cube-soft">

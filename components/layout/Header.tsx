@@ -99,12 +99,16 @@ function PortalDropdown({
   children,
   align = 'start',
   widthClass,
+  onMouseEnter,
+  onMouseLeave,
 }: {
   isOpen: boolean;
   triggerRef: React.RefObject<HTMLButtonElement | null>;
   children: React.ReactNode;
   align?: 'start' | 'end';
   widthClass: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }) {
   const [coords, setCoords] = useState<{ top: number; left: number; right: number } | null>(null);
 
@@ -157,6 +161,8 @@ function PortalDropdown({
       )}
       style={positionStyle}
       role="menu"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </div>,
@@ -335,7 +341,7 @@ export function Header() {
     dropdownTimeoutRef.current = setTimeout(() => {
       setOpenDropdown(null);
       hoverOpenedRef.current = null;
-    }, 120);
+    }, 300);
   }, [clearHoverTimeout]);
 
   const handleTriggerClick = useCallback((label: string) => {
@@ -450,6 +456,8 @@ export function Header() {
                   triggerRef={{ current: dropdownTriggerRefs.current[item.label] }}
                   align={isRightAligned ? 'end' : 'start'}
                   widthClass={widthClass}
+                  onMouseEnter={clearHoverTimeout}
+                  onMouseLeave={scheduleHoverClose}
                 >
                   {isIndustries ? (
                     <>

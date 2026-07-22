@@ -30,6 +30,8 @@ import { SixSides } from '@/components/ui/six-sides';
 import { siteConfig, cubeScoreDisclaimer } from '@/config/site';
 import { articles } from '@/content/articles';
 import { industries } from '@/content/industries';
+import { PageHero, ProcessTimeline, ReportMockup, ImprovementCycle, IndustryImageCard, VisualChecklist } from '@/components/ui/visual-sections';
+import { industryImages, pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: siteConfig.seo.defaultTitle,
@@ -132,63 +134,17 @@ export default function HomePage() {
   return (
     <>
       {/* ──────────────────────────── 1. Hero ──────────────────────────── */}
-      <section className="relative overflow-hidden bg-cube-navy py-16 lg:py-24">
-        <div className="cube-grid-bg cube-grid-fade absolute inset-0 opacity-20" aria-hidden="true" />
-        <Container className="relative">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <Eyebrow className="text-cube-green">
-                PRACTICAL QHSE AND WORKPLACE IMPROVEMENT
-              </Eyebrow>
-              <h1 className="text-display mt-3 text-white">
-                Strengthening Every Side of Your Business.
-              </h1>
-              <p className="mt-2 text-xl text-white/80">Safe. Compliant. Ready.</p>
-              <p className="mt-4 max-w-narrow text-body-lg text-white/70">
-                We help businesses protect people, reduce risks, improve systems, and stay ready for tomorrow through practical QHSE solutions designed around real workplace conditions.
-              </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button asChild variant="green" size="lg">
-                  <Link href="/cube-score">START WITH FREE CUBE SCORE</Link>
-                </Button>
-                <Button asChild variant="outlineGreen" size="lg">
-                  <Link href="/contact">TALK TO SAFE CUBE</Link>
-                </Button>
-              </div>
-              <p className="mt-6 text-sm text-white/60">
-                Built around international standards, local compliance requirements, and real workplace conditions.
-              </p>
-            </div>
-
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-md">
-                <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-overlay">
-                  <img
-                    src="https://images.pexels.com/photos/8434996/pexels-photo-8434996.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                    alt={heroImageAlt}
-                    className="aspect-[4/3] w-full object-cover"
-                    width={800}
-                    height={600}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cube-navy/60 to-transparent" aria-hidden="true" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex flex-wrap gap-2">
-                      {siteConfig.cubeSides.map((side) => (
-                        <span
-                          key={side}
-                          className="rounded-md bg-cube-navy/80 px-2 py-1 text-[0.625rem] font-medium text-white/90 backdrop-blur-sm"
-                        >
-                          {side}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="PRACTICAL QHSE AND WORKPLACE IMPROVEMENT"
+        title="Strengthening Every Side of Your Business."
+        description="We help businesses protect people, reduce risks, improve systems, and stay ready for tomorrow through practical QHSE solutions designed around real workplace conditions."
+        primaryCta={{ label: 'START WITH FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.homeHero}
+        imageAlt={pageImages.homeHeroAlt}
+        variant="split"
+        theme="navy"
+      />
 
       {/* ──────────────────────── 2. Workplace Problem ──────────────────── */}
       <section className="section-standard bg-white">
@@ -292,16 +248,10 @@ export default function HomePage() {
               A practical journey from understanding your workplace to building a culture of continual improvement.
             </SectionIntro>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step) => (
-              <ProcessStepCard
-                key={step.step}
-                step={step.step}
-                title={step.title}
-                description={step.text}
-              />
-            ))}
-          </div>
+          <ProcessTimeline
+            steps={processSteps.map((s) => ({ title: s.title, description: s.text, icon: s.step === 1 ? 'search' : s.step === 2 ? 'assessment' : s.step === 3 ? 'wrench' : 'refresh' }))}
+            background="soft"
+          />
         </Container>
       </section>
 
@@ -490,52 +440,9 @@ export default function HomePage() {
               </div>
             }
             right={
-              <div className="rounded-lg border border-cube-soft bg-white p-6 shadow-card">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-cube-navy">SAMPLE SCORE VIEW</h3>
-                  <span className="rounded-full bg-cube-amber/15 px-2 py-1 text-[0.625rem] font-semibold text-cube-amber">
-                    DEMONSTRATION ONLY
-                  </span>
-                </div>
-                <div className="mt-4 flex items-center justify-between rounded-md bg-cube-soft px-4 py-3">
-                  <span className="text-sm font-medium text-cube-navy">Overall Readiness</span>
-                  <span className="text-2xl font-bold text-cube-navy">72</span>
-                </div>
-                <div className="mt-4 space-y-3">
-                  {[
-                    { label: 'Occupational Health', value: 75, color: 'bg-cube-green' },
-                    { label: 'Workplace Safety', value: 68, color: 'bg-cube-amber' },
-                    { label: 'Environment', value: 80, color: 'bg-cube-green' },
-                    { label: 'Quality', value: 65, color: 'bg-cube-amber' },
-                    { label: 'Compliance', value: 70, color: 'bg-cube-green' },
-                    { label: 'Management Systems', value: 60, color: 'bg-cube-red' },
-                  ].map((cat) => (
-                    <div key={cat.label}>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">{cat.label}</span>
-                        <span className="font-medium text-cube-navy">{cat.value}</span>
-                      </div>
-                      <div className="mt-1 h-2 w-full rounded-full bg-cube-soft">
-                        <div
-                          className={`h-2 rounded-full ${cat.color}`}
-                          style={{ width: `${cat.value}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-cube-green" /> Ready
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-cube-amber" /> Attention
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-cube-red" /> Priority
-                  </span>
-                </div>
-                <p className="mt-4 text-xs text-muted-foreground/70">
+              <div>
+                <ReportMockup type="scorecard" title="SAMPLE SCORE VIEW" label="DEMONSTRATION ONLY" />
+                <p className="mt-3 text-xs text-muted-foreground/70">
                   {cubeScoreDisclaimer}
                 </p>
               </div>
@@ -588,62 +495,7 @@ export default function HomePage() {
               </div>
             }
             right={
-              <div className="rounded-lg border border-cube-soft bg-cube-soft p-6 shadow-card">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-cube-navy">SAMPLE REPORT PREVIEW</h3>
-                  <span className="rounded-full bg-cube-amber/15 px-2 py-1 text-[0.625rem] font-semibold text-cube-amber">
-                    ILLUSTRATIVE
-                  </span>
-                </div>
-                <div className="mt-4 space-y-3">
-                  <div className="rounded-md border border-cube-soft bg-white p-4">
-                    <p className="text-xs font-semibold text-cube-navy">Executive Summary</p>
-                    <div className="mt-2 space-y-1.5">
-                      <div className="h-2 w-full rounded bg-cube-soft" />
-                      <div className="h-2 w-5/6 rounded bg-cube-soft" />
-                      <div className="h-2 w-4/6 rounded bg-cube-soft" />
-                    </div>
-                  </div>
-                  <div className="rounded-md border border-cube-soft bg-white p-4">
-                    <p className="text-xs font-semibold text-cube-navy">Risk-Priority Findings</p>
-                    <div className="mt-2 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-cube-red" />
-                        <div className="h-2 flex-1 rounded bg-cube-soft" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-cube-amber" />
-                        <div className="h-2 flex-1 rounded bg-cube-soft" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-cube-green" />
-                        <div className="h-2 flex-1 rounded bg-cube-soft" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-md border border-cube-soft bg-white p-4">
-                    <p className="text-xs font-semibold text-cube-navy">Corrective Actions</p>
-                    <div className="mt-2 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Wrench className="h-3 w-3 text-cube-green" aria-hidden="true" />
-                        <div className="h-2 flex-1 rounded bg-cube-soft" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Wrench className="h-3 w-3 text-cube-green" aria-hidden="true" />
-                        <div className="h-2 flex-1 rounded bg-cube-soft" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-md border border-cube-soft bg-white p-4">
-                    <p className="text-xs font-semibold text-cube-navy">Improvement Roadmap</p>
-                    <div className="mt-2 flex gap-2">
-                      <div className="flex-1 rounded bg-cube-green/10 p-2 text-center text-[0.625rem] font-medium text-cube-green">30 Day</div>
-                      <div className="flex-1 rounded bg-cube-amber/10 p-2 text-center text-[0.625rem] font-medium text-cube-amber">60 Day</div>
-                      <div className="flex-1 rounded bg-cube-blue/10 p-2 text-center text-[0.625rem] font-medium text-cube-blue">90 Day</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ReportMockup type="report" title="SAMPLE REPORT VIEW" label="ILLUSTRATIVE" />
             }
           />
         </Container>
@@ -690,33 +542,7 @@ export default function HomePage() {
             }
             right={
               <div className="flex h-full items-center justify-center">
-                <div className="relative">
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { label: 'Review', icon: Search },
-                      { label: 'Act', icon: ClipboardCheck },
-                      { label: 'Verify', icon: ShieldCheck },
-                      { label: 'Maintain', icon: RefreshCw },
-                    ].map((phase, idx) => {
-                      const Icon = phase.icon;
-                      return (
-                        <div
-                          key={phase.label}
-                          className="flex h-32 w-32 flex-col items-center justify-center gap-2 rounded-xl border border-cube-soft bg-white shadow-card"
-                        >
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cube-green/10 text-cube-green">
-                            <Icon className="h-5 w-5" aria-hidden="true" />
-                          </div>
-                          <span className="text-sm font-semibold text-cube-navy">{phase.label}</span>
-                          <span className="text-xs text-muted-foreground">Step {idx + 1}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-muted-foreground">Continual Improvement Cycle</p>
-                  </div>
-                </div>
+                <ImprovementCycle />
               </div>
             }
           />
@@ -735,20 +561,23 @@ export default function HomePage() {
               Every workplace is different. SAFE CUBE adapts its assessments, checklists, recommendations, documentation, and support to your actual operations.
             </SectionIntro>
           </div>
-          <ThreeColumnGrid>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {industries
               .filter((ind) => ind.featured)
-              .map((ind) => (
-                <IndustryCard
-                  key={ind.slug}
-                  icon={ind.iconName ?? 'industries'}
-                  name={ind.name}
-                  description={ind.cardSummary}
-                  href={`/industries/${ind.slug}`}
-                  color="green"
-                />
-              ))}
-          </ThreeColumnGrid>
+              .map((ind) => {
+                const img = industryImages[ind.slug];
+                return (
+                  <IndustryImageCard
+                    key={ind.slug}
+                    name={ind.name}
+                    description={ind.cardSummary}
+                    href={`/industries/${ind.slug}`}
+                    image={img?.hero || pageImages.industriesHero}
+                    imageAlt={img?.heroAlt || ind.name}
+                  />
+                );
+              })}
+          </div>
           <div className="mt-8 text-center">
             <Button asChild variant="outlineBlue" size="lg">
               <Link href="/industries">

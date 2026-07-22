@@ -4,7 +4,8 @@ import { Download } from 'lucide-react';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { CTADark } from '@/components/ui/cta';
 import { downloads } from '@/content/downloads';
 
@@ -18,10 +19,15 @@ export const metadata: Metadata = {
 export default function GuidesPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Knowledge Centre', href: '/knowledge-centre' }, { label: 'Guides & Checklists' }]}
+        eyebrow="GUIDES & CHECKLISTS"
         title="Guides & Checklists"
         description="Download practical workplace safety checklists, inspection templates, registers, and forms designed to support your daily and periodic workplace activities."
+        image={pageImages.knowledgeCentreHero}
+        imageAlt={pageImages.knowledgeCentreHeroAlt}
+        variant="compact"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

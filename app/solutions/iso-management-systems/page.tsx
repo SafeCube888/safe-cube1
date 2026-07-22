@@ -5,8 +5,9 @@ import { Eyebrow, SectionHeading, SectionIntro, SectionDivider } from '@/compone
 import { Container } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero, VisualFeatureGrid, ProcessTimeline, ContentCallout } from '@/components/ui/visual-sections';
 import { isoDisclaimer } from '@/config/site';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'ISO Management-System Support | SAFE CUBE',
@@ -56,14 +57,17 @@ const iso45001Points = [
 export default function IsoManagementSystemsPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'ISO & Management Systems' }]}
+        eyebrow="ISO-ALIGNED MANAGEMENT SYSTEMS"
         title="ISO & Management Systems"
         description="Build Management Systems People Can Actually Use."
-        primaryLabel="GET FREE CUBE SCORE"
-        primaryHref="/cube-score"
-        secondaryLabel="TALK TO SAFE CUBE"
-        secondaryHref="/contact"
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.isoHero}
+        imageAlt={pageImages.isoHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Core Services */}
@@ -150,12 +154,29 @@ export default function IsoManagementSystemsPage() {
       {/* Certification Disclaimer */}
       <section className="section-standard bg-white">
         <Container width="narrow">
-          <div className="rounded-lg border border-cube-soft bg-cube-soft p-6">
-            <h3 className="text-base font-semibold text-cube-navy">Certification Disclaimer</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{isoDisclaimer}</p>
-          </div>
+          <ContentCallout type="disclaimer" title="Certification Disclaimer">
+            {isoDisclaimer}
+          </ContentCallout>
         </Container>
       </section>
+
+      {/* Implementation Timeline */}
+      <ProcessTimeline
+        eyebrow="IMPLEMENTATION JOURNEY"
+        heading="Management-System Implementation Timeline"
+        intro="A structured path from initial gap assessment to certification readiness."
+        steps={[
+          { title: 'Gap Assessment', description: 'Identify current state against ISO requirements.', icon: 'search' },
+          { title: 'Scope & Context', description: 'Define system scope, context, and stakeholder needs.', icon: 'target' },
+          { title: 'Documentation', description: 'Develop policies, procedures, and documented information.', icon: 'documents' },
+          { title: 'Implementation', description: 'Put the system into practice across the organization.', icon: 'gear' },
+          { title: 'Training', description: 'Train staff on system requirements and responsibilities.', icon: 'graduation' },
+          { title: 'Internal Audit', description: 'Verify system effectiveness through internal audits.', icon: 'inspection' },
+          { title: 'Management Review', description: 'Review system performance and improvement opportunities.', icon: 'assessment' },
+          { title: 'Certification Readiness', description: 'Prepare for external certification audit.', icon: 'badge' },
+        ]}
+        background="white"
+      />
 
       {/* Final CTA */}
       <section className="section-standard bg-cube-soft">

@@ -12,6 +12,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { siteConfig } from '@/config/site';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
 import { submitStoreLaunchForm } from '@/lib/actions';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 const plannedCategories = [
   { name: 'Personal Protective Equipment', description: 'Gloves, helmets, eyewear, hi-vis, footwear, and respiratory protection.' },
@@ -52,39 +54,17 @@ export default function StoreComingSoon() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-cube-navy text-white">
-        <div className="absolute inset-0 bg-gradient-to-br from-cube-navy via-cube-navy to-cube-green/20" />
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(94,148,0,0.3) 0%, transparent 50%)' }} />
-        <Container className="relative z-10 section-lg">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-cube-green/20 ring-1 ring-cube-green/30">
-              <ShoppingBag className="h-8 w-8 text-cube-green" aria-hidden="true" />
-            </div>
-            <Eyebrow className="text-cube-green">COMING SOON</Eyebrow>
-            <h1 className="mt-4 text-h1 text-white">Cube Store</h1>
-            <p className="mt-4 text-xl text-white/80">
-              Your trusted source for workplace safety equipment, PPE, emergency supplies, and compliance products — launching soon.
-            </p>
-            <p className="mt-6 text-body text-white/60">
-              We are carefully curating a range of high-quality workplace safety products to support your QHSE journey. While the Cube Store is being prepared, you can still request product quotations directly through our team.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact?service=cube-store">
-                <Button size="lg" className="bg-cube-green hover:bg-cube-green/90 text-white">
-                  REQUEST A PRODUCT QUOTATION
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <a href={siteConfig.contact.whatsappHref} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:text-white">
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  WHATSAPP US
-                </Button>
-              </a>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Cube Store' }]}
+        eyebrow="COMING SOON"
+        title="Cube Store"
+        description="Practical Workplace Safety Products Are Coming Soon. We are carefully curating a range of high-quality workplace safety products to support your QHSE journey."
+        primaryCta={{ label: 'REQUEST A PRODUCT QUOTATION', href: '/contact?service=cube-store' }}
+        image={pageImages.storeHero}
+        imageAlt={pageImages.storeHeroAlt}
+        variant="banner"
+        theme="navy"
+      />
 
       {/* Planned Categories */}
       <section className="section-standard bg-white">

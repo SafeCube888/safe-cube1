@@ -4,7 +4,8 @@ import { Eyebrow, SectionHeading } from '@/components/ui/typography';
 import { Container } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { TextInput, EmailInput, PhoneInput, TextAreaField, SelectField, RadioGroupField, ConsentCheckbox, FormSectionHeading } from '@/components/ui/forms';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { CTADark } from '@/components/ui/cta';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
@@ -38,10 +39,16 @@ export default function BookConsultationPage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Book a Consultation' }]}
+        eyebrow="CONSULTATION"
         title="Book a Consultation"
         description="Schedule a consultation with SAFE CUBE to discuss your workplace needs, assessment options, or improvement goals."
+        primaryCta={{ label: 'BOOK NOW', href: '#consultation-form' }}
+        image={pageImages.bookConsultationHero}
+        imageAlt={pageImages.bookConsultationHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

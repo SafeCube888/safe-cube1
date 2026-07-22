@@ -4,7 +4,8 @@ import { Eyebrow, SectionHeading } from '@/components/ui/typography';
 import { Container, TwoColumnLayout } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { CTADark } from '@/components/ui/cta';
-import { IndustryHero } from '@/components/ui/heroes';
+import { PageHero, VisualChecklist, ProcessTimeline, VisualFeatureGrid } from '@/components/ui/visual-sections';
+import { industryImages, pageImages } from '@/content/images';
 import type { Industry } from '@/types/content';
 
 const relevantSolutions = [
@@ -31,14 +32,20 @@ export interface IndustryPageTemplateProps {
 }
 
 export function IndustryPageTemplate({ industry, recommendedTraining }: IndustryPageTemplateProps) {
+  const img = industryImages[industry.slug];
   return (
     <>
-      <IndustryHero
-        icon={industry.iconName ?? 'industries'}
+      <PageHero
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Industries', href: '/industries' }, { label: industry.shortName }]}
+        eyebrow={industry.name.toUpperCase()}
         title={industry.heroHeading}
-        statement={industry.introduction}
-        primaryLabel={industry.ctaLabel}
-        primaryHref={industry.ctaHref}
+        description={industry.introduction}
+        primaryCta={{ label: industry.ctaLabel, href: industry.ctaHref }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={img?.hero || pageImages.industriesHero}
+        imageAlt={img?.heroAlt || industry.name}
+        variant="industry"
+        theme="industry"
       />
 
       {/* Common Risks */}
@@ -55,14 +62,7 @@ export function IndustryPageTemplate({ industry, recommendedTraining }: Industry
               </div>
             }
             right={
-              <ul className="space-y-3">
-                {industry.commonRisks.map((risk) => (
-                  <li key={risk} className="flex items-start gap-2 text-body-lg text-muted-foreground">
-                    <Check className="mt-1 h-5 w-5 flex-shrink-0 text-cube-amber" aria-hidden="true" />
-                    <span>{risk}</span>
-                  </li>
-                ))}
-              </ul>
+              <VisualChecklist items={industry.commonRisks.map((risk) => ({ text: risk, type: 'amber' }))} />
             }
           />
         </Container>
@@ -82,14 +82,7 @@ export function IndustryPageTemplate({ industry, recommendedTraining }: Industry
               </div>
             }
             right={
-              <ul className="space-y-3">
-                {industry.safeCubeSupport.map((support) => (
-                  <li key={support} className="flex items-start gap-2 text-body-lg text-muted-foreground">
-                    <Check className="mt-1 h-5 w-5 flex-shrink-0 text-cube-green" aria-hidden="true" />
-                    <span>{support}</span>
-                  </li>
-                ))}
-              </ul>
+              <VisualChecklist items={industry.safeCubeSupport.map((support) => ({ text: support, type: 'green' }))} />
             }
           />
         </Container>
@@ -143,23 +136,12 @@ export function IndustryPageTemplate({ industry, recommendedTraining }: Industry
       </section>
 
       {/* How Engagement Works */}
-      <section className="section-standard bg-white">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">HOW IT WORKS</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">How Engagement Works</SectionHeading>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {engagementSteps.map((step) => (
-              <div key={step.step} className="rounded-lg border border-cube-soft bg-cube-soft p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cube-navy text-sm font-bold text-white">{step.step}</span>
-                <h3 className="mt-4 text-base font-semibold text-cube-navy">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ProcessTimeline
+        eyebrow="HOW IT WORKS"
+        heading="How Engagement Works"
+        steps={engagementSteps.map((s) => ({ title: s.title, description: s.text, icon: s.step === 1 ? 'search' : s.step === 2 ? 'assessment' : s.step === 3 ? 'reports' : 'refresh' }))}
+        background="white"
+      />
 
       {/* Industry CTA */}
       <section className="section-standard bg-cube-soft">

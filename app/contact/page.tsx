@@ -21,7 +21,8 @@ import {
 } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
 import { submitContactForm } from '@/lib/actions';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { siteConfig } from '@/config/site';
 
 const serviceOptions = [
@@ -128,10 +129,16 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+        eyebrow="CONTACT"
         title="Contact SAFE CUBE"
         description="Get in touch to discuss your workplace needs, request an assessment, or ask about any of our services."
+        primaryCta={{ label: 'SEND MESSAGE', href: '#contact-form' }}
+        image={pageImages.contactHero}
+        imageAlt={pageImages.contactHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

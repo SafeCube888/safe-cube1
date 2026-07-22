@@ -3,7 +3,8 @@ import { Check } from 'lucide-react';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container } from '@/components/ui/layout';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero, VisualFeatureGrid, ProcessTimeline, RiskMatrix, HierarchyOfControls, VisualChecklist } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'Risk Assessment & Workplace Audits | SAFE CUBE',
@@ -41,56 +42,59 @@ const methodologySteps = [
 export default function RiskAssessmentAuditsPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Risk Assessment & Workplace Audits' }]}
+        eyebrow="STRUCTURED RISK REVIEWS"
         title="Risk Assessment & Workplace Audits"
         description="Understand Risk Before It Becomes Loss."
-        primaryLabel="GET FREE CUBE SCORE"
-        primaryHref="/cube-score"
-        secondaryLabel="TALK TO SAFE CUBE"
-        secondaryHref="/contact"
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.riskAssessmentHero}
+        imageAlt={pageImages.riskAssessmentHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Service Types */}
-      <section className="section-standard bg-white">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">SERVICE TYPES</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">Types of Assessments and Audits</SectionHeading>
-            <SectionIntro className="mt-4">
-              SAFE CUBE offers a range of structured assessments and audits designed to identify hazards, evaluate risks, assess controls, and prioritize improvement actions.
-            </SectionIntro>
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {serviceTypes.map((service) => (
-              <div key={service} className="flex items-start gap-3 rounded-lg border border-cube-soft bg-cube-soft p-4">
-                <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-cube-green" aria-hidden="true" />
-                <span className="text-sm text-muted-foreground">{service}</span>
-              </div>
-            ))}
-          </div>
+      <VisualFeatureGrid
+        eyebrow="SERVICE TYPES"
+        heading="Types of Assessments and Audits"
+        intro="SAFE CUBE offers a range of structured assessments and audits designed to identify hazards, evaluate risks, assess controls, and prioritize improvement actions."
+        items={serviceTypes.map((service) => ({ icon: 'inspection', title: service, description: '' }))}
+        columns={2}
+        background="white"
+      />
+
+      {/* Hierarchy of Controls */}
+      <section className="section-standard bg-cube-soft">
+        <Container width="narrow">
+          <Eyebrow className="text-cube-green">HIERARCHY OF CONTROLS</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">Hierarchy of Controls</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            We apply the hierarchy of controls to evaluate and recommend risk-reduction measures, from most effective to least effective.
+          </SectionIntro>
+          <div className="mt-8"><HierarchyOfControls /></div>
         </Container>
       </section>
 
       {/* Methodology */}
-      <section className="section-standard bg-cube-soft">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">METHODOLOGY</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">Our Ten-Step Methodology</SectionHeading>
-            <SectionIntro className="mt-4">
-              We follow a structured ten-step methodology to ensure that every assessment is thorough, consistent, and actionable.
-            </SectionIntro>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
-            {methodologySteps.map((step) => (
-              <div key={step.step} className="rounded-lg border border-cube-soft bg-white p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cube-navy text-sm font-bold text-white">{step.step}</span>
-                <h3 className="mt-4 text-base font-semibold text-cube-navy">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
-              </div>
-            ))}
-          </div>
+      <ProcessTimeline
+        eyebrow="METHODOLOGY"
+        heading="Our Ten-Step Methodology"
+        intro="We follow a structured ten-step methodology to ensure that every assessment is thorough, consistent, and actionable."
+        steps={methodologySteps.map((s) => ({ title: s.title, description: s.text }))}
+        background="soft"
+      />
+
+      {/* Risk Matrix */}
+      <section className="section-standard bg-white">
+        <Container width="wide">
+          <Eyebrow className="text-cube-green">SAMPLE RISK MATRIX</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">Sample Risk-Priority Matrix</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            Findings are rated using a likelihood-severity matrix to determine the appropriate priority level.
+          </SectionIntro>
+          <div className="mt-8"><RiskMatrix /></div>
         </Container>
       </section>
 

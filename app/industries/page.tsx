@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container, ThreeColumnGrid } from '@/components/ui/layout';
-import { IndustryCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Button } from '@/components/ui/button';
+import { PageHero, IndustryImageCard } from '@/components/ui/visual-sections';
 import { industries } from '@/content/industries';
+import { industryImages, pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'Industries Supported by SAFE CUBE',
@@ -28,10 +28,17 @@ const whyChoose = [
 export default function IndustriesPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Industries' }]}
+        eyebrow="INDUSTRY-SPECIFIC SUPPORT"
         title="Supporting Real Workplaces Across Multiple Industries"
         description="Every workplace is different. SAFE CUBE adapts its assessments, checklists, recommendations, documentation, and support to your actual operations."
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.industriesHero}
+        imageAlt={pageImages.industriesHeroAlt}
+        variant="banner"
+        theme="navy"
       />
 
       {/* All 12 industries */}
@@ -41,18 +48,21 @@ export default function IndustriesPage() {
             <Eyebrow className="text-cube-green">INDUSTRIES</Eyebrow>
             <SectionHeading className="mt-3" as="h2">Industries We Support</SectionHeading>
           </div>
-          <ThreeColumnGrid>
-            {industries.map((industry) => (
-              <IndustryCard
-                key={industry.slug}
-                icon={industry.iconName ?? 'industries'}
-                name={industry.name}
-                description={industry.cardSummary}
-                href={`/industries/${industry.slug}`}
-                color="green"
-              />
-            ))}
-          </ThreeColumnGrid>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry) => {
+              const img = industryImages[industry.slug];
+              return (
+                <IndustryImageCard
+                  key={industry.slug}
+                  name={industry.name}
+                  description={industry.cardSummary}
+                  href={`/industries/${industry.slug}`}
+                  image={img?.hero || pageImages.industriesHero}
+                  imageAlt={img?.heroAlt || industry.name}
+                />
+              );
+            })}
+          </div>
         </Container>
       </section>
 

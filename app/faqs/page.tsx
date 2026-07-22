@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container } from '@/components/ui/layout';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 import { CTADark } from '@/components/ui/cta';
 import { faqs } from '@/content/faqs';
 import { FaqAccordion } from '@/components/faq/FaqAccordion';
@@ -33,10 +34,15 @@ export default function FaqsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'FAQs' }]}
+        eyebrow="FAQS"
         title="Frequently Asked Questions"
         description="Answers to common questions about SAFE CUBE services, workplace safety, and compliance support."
+        image={pageImages.faqsHero}
+        imageAlt={pageImages.faqsHeroAlt}
+        variant="compact"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

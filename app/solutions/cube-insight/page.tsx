@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Eyebrow, SectionHeading, SectionIntro } from '@/components/ui/typography';
 import { Container, TwoColumnLayout, Section } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { CTADark } from '@/components/ui/cta';
-import { Card, CardContent } from '@/components/ui/card';
+import { PageHero, ReportMockup, RiskMatrix, RoadmapTimeline, VisualChecklist, ContentCallout } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'CUBE INSIGHT | Detailed Workplace Assessment and Improvement Roadmap',
@@ -94,53 +94,42 @@ const riskPriorities = [
 export default function CubeInsightPage() {
   return (
     <>
-      <InternalPageHero
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Solutions', href: '/solutions' },
-          { label: 'CUBE INSIGHT' },
-        ]}
+      <PageHero
+        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'CUBE INSIGHT' }]}
+        eyebrow="DETAILED WORKPLACE ASSESSMENT"
         title="CUBE INSIGHT"
         description="See Beyond the Score With CUBE INSIGHT."
+        primaryCta={{ label: 'REQUEST CUBE INSIGHT', href: '/contact?service=cube-insight' }}
+        secondaryCta={{ label: 'EXPLORE CUBE CARE', href: '/solutions/cube-care' }}
+        image={pageImages.cubeInsightHero}
+        imageAlt={pageImages.cubeInsightHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* Section 1 - When CUBE INSIGHT Is Needed */}
-      <Section spacing="standard" background="default">
+      <section className="section-standard bg-white">
         <Container>
-          <div className="max-w-narrow">
-            <Eyebrow>WHEN IT IS NEEDED</Eyebrow>
-            <SectionHeading className="mt-3">
-              When CUBE INSIGHT Is Needed
-            </SectionHeading>
-            <SectionIntro align="left" className="mt-4">
-              CUBE INSIGHT is for businesses that need more than a high-level
-              overview. It is suitable when you need documented findings,
-              risk-rated priorities, corrective actions, and a structured
-              improvement roadmap. It is also appropriate when preparing for
-              inspections, client audits, or management reviews.
-            </SectionIntro>
-            <ul className="mt-8 space-y-3">
-              {whenNeededItems.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-cube-green/10 text-cube-green">
-                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
-                  <span className="text-body text-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <Eyebrow className="text-cube-green">WHEN IT IS NEEDED</Eyebrow>
+              <SectionHeading className="mt-3" as="h2">When CUBE INSIGHT Is Needed</SectionHeading>
+              <p className="mt-4 text-body-lg text-muted-foreground">
+                CUBE INSIGHT is for businesses that need more than a high-level overview. It is suitable when you need documented findings, risk-rated priorities, corrective actions, and a structured improvement roadmap.
+              </p>
+            </div>
+            <VisualChecklist items={whenNeededItems.map((item) => ({ text: item, type: 'green' }))} />
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* Section 2 - Assessment Areas */}
-      <Section spacing="standard" background="soft">
+      <section className="section-standard bg-cube-soft">
         <Container>
-          <Eyebrow>ASSESSMENT AREAS</Eyebrow>
-          <SectionHeading className="mt-3">What We Assess</SectionHeading>
-          <SectionIntro align="left" className="mt-4">
-            CUBE INSIGHT covers the six SAFE CUBE categories in detail, adapted
-            to your workplace and operations.
+          <Eyebrow className="text-cube-green">ASSESSMENT AREAS</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">What We Assess</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            CUBE INSIGHT covers the six SAFE CUBE categories in detail, adapted to your workplace and operations.
           </SectionIntro>
           <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
             {assessmentAreaItems.map((item) => (
@@ -153,170 +142,97 @@ export default function CubeInsightPage() {
             ))}
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* Section 3 - What The Client Receives */}
-      <Section spacing="standard" background="default">
+      <section className="section-standard bg-white">
         <Container>
-          <div className="max-w-narrow">
-            <Eyebrow>WHAT YOU RECEIVE</Eyebrow>
-            <SectionHeading className="mt-3">What You Receive</SectionHeading>
-            <ul className="mt-8 space-y-3">
-              {receivedItems.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-cube-green/10 text-cube-green">
-                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
-                  <span className="text-body text-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <Eyebrow className="text-cube-green">WHAT YOU RECEIVE</Eyebrow>
+              <SectionHeading className="mt-3" as="h2">What You Receive</SectionHeading>
+              <VisualChecklist items={receivedItems.map((item) => ({ text: item, type: 'green' }))} />
+            </div>
+            <ReportMockup type="report" title="SAMPLE REPORT VIEW" label="ILLUSTRATIVE" />
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* Section 4 - Full Report Structure */}
-      <Section spacing="standard" background="soft">
+      <section className="section-standard bg-cube-soft">
         <Container>
-          <Eyebrow>REPORT STRUCTURE</Eyebrow>
-          <SectionHeading className="mt-3">
-            Full Report Structure
-          </SectionHeading>
-          <SectionIntro align="left" className="mt-4">
-            Your CUBE INSIGHT report follows a structured format designed to be
-            clear, actionable, and suitable for management review.
+          <Eyebrow className="text-cube-green">REPORT STRUCTURE</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">Full Report Structure</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            Your CUBE INSIGHT report follows a structured format designed to be clear, actionable, and suitable for management review.
           </SectionIntro>
           <ol className="mt-8 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
             {reportSections.map((section, index) => (
-              <li
-                key={section}
-                className="flex items-start gap-3"
-              >
-                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-cube-navy text-xs font-semibold text-white">
-                  {index + 1}
-                </span>
-                <span className="text-body text-foreground pt-0.5">
-                  {section}
-                </span>
+              <li key={section} className="flex items-start gap-3">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-cube-navy text-xs font-semibold text-white">{index + 1}</span>
+                <span className="text-body text-foreground pt-0.5">{section}</span>
               </li>
             ))}
           </ol>
         </Container>
-      </Section>
+      </section>
 
       {/* Section 5 - Risk-Priority Definitions */}
-      <Section spacing="standard" background="default">
+      <section className="section-standard bg-white">
         <Container>
-          <Eyebrow>RISK PRIORITIES</Eyebrow>
-          <SectionHeading className="mt-3">
-            Risk-Priority Definitions
-          </SectionHeading>
-          <SectionIntro align="left" className="mt-4">
-            Every finding in your CUBE INSIGHT report is assigned a risk
-            priority so you can act on the most important issues first.
+          <Eyebrow className="text-cube-green">RISK PRIORITIES</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">Risk-Priority Definitions</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            Every finding in your CUBE INSIGHT report is assigned a risk priority so you can act on the most important issues first.
           </SectionIntro>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {riskPriorities.map((priority) => (
-              <Card key={priority.label} className="flex flex-col">
-                <CardContent className="flex flex-col gap-4 p-6">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${priority.badgeClass}`}
-                    >
-                      {priority.badge}
-                    </span>
-                    <h3 className="text-h3 text-cube-navy">{priority.label}</h3>
-                  </div>
-                  <p className="text-body text-muted-foreground">
-                    {priority.description}
-                  </p>
-                </CardContent>
-              </Card>
+              <div key={priority.label} className="rounded-lg border border-cube-soft bg-cube-soft p-6">
+                <div className="flex items-center gap-3">
+                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${priority.badgeClass}`}>{priority.badge}</span>
+                  <h3 className="text-h3 text-cube-navy">{priority.label}</h3>
+                </div>
+                <p className="mt-3 text-body text-muted-foreground">{priority.description}</p>
+              </div>
             ))}
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* Section 6 - Sample Report Visual */}
-      <Section spacing="standard" background="soft">
-        <Container>
-          <Eyebrow>SAMPLE REPORT</Eyebrow>
-          <SectionHeading className="mt-3">
-            A Look Inside the Report
-          </SectionHeading>
-          <SectionIntro align="left" className="mt-4">
-            Below is an illustrative view of how your CUBE INSIGHT report is
-            structured and presented.
+      {/* Section 6 - Risk Matrix */}
+      <section className="section-standard bg-cube-soft">
+        <Container width="wide">
+          <Eyebrow className="text-cube-green">RISK ASSESSMENT MATRIX</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">Sample Risk-Priority Matrix</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            Findings are rated using a likelihood-severity matrix to determine the appropriate priority level.
           </SectionIntro>
-          <div className="mt-8 overflow-hidden rounded-lg border border-cube-soft bg-white shadow-card">
-            {/* Header bar */}
-            <div className="flex items-center justify-between border-b border-cube-soft bg-cube-soft/60 px-6 py-4">
-              <span className="text-sm font-semibold tracking-widest text-cube-navy">
-                SAMPLE REPORT VIEW
-              </span>
-              <span className="inline-flex items-center rounded-full bg-cube-navy px-3 py-1 text-xs font-semibold tracking-wider text-white">
-                ILLUSTRATIVE
-              </span>
-            </div>
-            {/* Mock body */}
-            <div className="p-6 lg:p-8">
-              <TwoColumnLayout
-                left={
-                  <div className="space-y-4">
-                    <div className="h-4 w-1/3 rounded bg-cube-soft" />
-                    <div className="h-3 w-full rounded bg-cube-soft/80" />
-                    <div className="h-3 w-5/6 rounded bg-cube-soft/80" />
-                    <div className="h-3 w-4/6 rounded bg-cube-soft/80" />
-                    <div className="mt-6 h-4 w-1/2 rounded bg-cube-soft" />
-                    <div className="h-3 w-full rounded bg-cube-soft/80" />
-                    <div className="h-3 w-3/4 rounded bg-cube-soft/80" />
-                  </div>
-                }
-                right={
-                  <div className="space-y-4">
-                    <div className="rounded-md border border-cube-soft p-4">
-                      <div className="mb-3 h-3 w-1/2 rounded bg-cube-soft" />
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
-                          <div className="h-2.5 w-3/4 rounded bg-cube-soft" />
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
-                          <div className="h-2.5 w-2/3 rounded bg-cube-soft" />
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
-                          <div className="h-2.5 w-4/5 rounded bg-cube-soft" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-md border border-cube-soft p-4">
-                      <div className="mb-3 h-3 w-1/3 rounded bg-cube-soft" />
-                      <div className="grid grid-cols-3 gap-2">
-                        <div className="h-8 rounded bg-cube-soft/70" />
-                        <div className="h-8 rounded bg-cube-soft/70" />
-                        <div className="h-8 rounded bg-cube-soft/70" />
-                      </div>
-                    </div>
-                  </div>
-                }
-              />
-            </div>
-          </div>
+          <div className="mt-8"><RiskMatrix /></div>
         </Container>
-      </Section>
+      </section>
+
+      {/* Section 7 - Improvement Roadmap */}
+      <section className="section-standard bg-white">
+        <Container>
+          <Eyebrow className="text-cube-green">IMPROVEMENT ROADMAP</Eyebrow>
+          <SectionHeading className="mt-3" as="h2">30 / 60 / 90-Day Roadmap</SectionHeading>
+          <SectionIntro className="mt-4" align="left">
+            Your CUBE INSIGHT report includes a prioritized improvement roadmap with actions grouped by timeframe.
+          </SectionIntro>
+          <div className="mt-8"><RoadmapTimeline /></div>
+        </Container>
+      </section>
 
       {/* Final CTA */}
-      <Section spacing="standard" background="default">
+      <Section spacing="standard" background="soft">
         <Container>
           <CTADark
-            heading="Ready to See Beyond the Score?"
-            text="CUBE INSIGHT provides documented findings, risk priorities, and a structured improvement roadmap. Book your assessment today."
-            primaryLabel="BOOK CUBE INSIGHT"
+            heading="Ready for a Detailed Assessment?"
+            text="CUBE INSIGHT provides documented findings, risk-rated priorities, and a structured improvement roadmap. Start with CUBE INSIGHT or contact us to discuss your needs."
+            primaryLabel="REQUEST CUBE INSIGHT"
             primaryHref="/contact?service=cube-insight"
-            secondaryLabel="EXPLORE CUBE CARE"
-            secondaryHref="/solutions/cube-care"
+            secondaryLabel="BOOK A CONSULTATION"
+            secondaryHref="/book-consultation"
           />
         </Container>
       </Section>

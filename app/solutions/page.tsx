@@ -5,8 +5,9 @@ import { Eyebrow, SectionHeading, SectionIntro, SectionDivider } from '@/compone
 import { Container } from '@/components/ui/layout';
 import { ServiceCard } from '@/components/ui/cards';
 import { CTADark } from '@/components/ui/cta';
-import { InternalPageHero } from '@/components/ui/heroes';
 import { Button } from '@/components/ui/button';
+import { PageHero } from '@/components/ui/visual-sections';
+import { pageImages } from '@/content/images';
 
 export const metadata: Metadata = {
   title: 'SAFE CUBE Solutions | Assess, Improve and Sustain Workplace Performance',
@@ -57,10 +58,17 @@ const journeyGroups = [
 export default function SolutionsPage() {
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions' }]}
+        eyebrow="SAFE CUBE SOLUTIONS"
         title="Choose the Right Level of Support"
         description="From a quick professional observation to continuous workplace improvement, SAFE CUBE allows businesses to begin according to their current needs, risk profile, and readiness."
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '/cube-score' }}
+        secondaryCta={{ label: 'TALK TO SAFE CUBE', href: '/contact' }}
+        image={pageImages.solutionsHero}
+        imageAlt={pageImages.solutionsHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       <section className="section-standard bg-white">

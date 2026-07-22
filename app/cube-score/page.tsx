@@ -6,8 +6,9 @@ import { Eyebrow, SectionHeading, SectionDivider } from '@/components/ui/typogra
 import { Container, TwoColumnLayout } from '@/components/ui/layout';
 import { Button } from '@/components/ui/button';
 import { TextInput, EmailInput, PhoneInput, TextAreaField, SelectField, ConsentCheckbox, FormSectionHeading } from '@/components/ui/forms';
-import { InternalPageHero } from '@/components/ui/heroes';
+import { PageHero, ReportMockup, ProcessTimeline } from '@/components/ui/visual-sections';
 import { cubeScoreDisclaimer } from '@/config/site';
+import { pageImages } from '@/content/images';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
 import { submitCubeScoreForm } from '@/lib/actions';
@@ -82,14 +83,17 @@ export default function CubeScorePage() {
 
   return (
     <>
-      <InternalPageHero
+      <PageHero
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'CUBE SCORE' }]}
+        eyebrow="FREE WORKPLACE READINESS ASSESSMENT"
         title="Discover Where Your Workplace Stands."
         description="CUBE SCORE is an introductory workplace assessment that helps businesses understand their overall readiness across occupational health, workplace safety, environment, quality, compliance, and management systems."
-        primaryLabel="GET FREE CUBE SCORE"
-        primaryHref="#request-form"
-        secondaryLabel="HOW THE SCORE WORKS"
-        secondaryHref="#how-it-works"
+        primaryCta={{ label: 'GET FREE CUBE SCORE', href: '#request-form' }}
+        secondaryCta={{ label: 'HOW THE SCORE WORKS', href: '#how-it-works' }}
+        image={pageImages.cubeScoreHero}
+        imageAlt={pageImages.cubeScoreHeroAlt}
+        variant="split"
+        theme="light"
       />
 
       {/* What CUBE SCORE is */}
@@ -145,40 +149,9 @@ export default function CubeScorePage() {
               </div>
             }
             right={
-              <div className="rounded-lg border border-cube-soft bg-cube-soft p-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-cube-navy">SAMPLE SCORE VIEW</h3>
-                  <span className="rounded-full bg-cube-amber/15 px-2 py-1 text-[0.625rem] font-semibold text-cube-amber">DEMONSTRATION ONLY</span>
-                </div>
-                <div className="mt-4 flex items-center justify-between rounded-md bg-white px-4 py-3">
-                  <span className="text-sm font-medium text-cube-navy">Overall Readiness</span>
-                  <span className="text-2xl font-bold text-cube-navy">72</span>
-                </div>
-                <div className="mt-4 space-y-3">
-                  {[
-                    { label: 'Occupational Health', value: 75, color: 'bg-cube-green' },
-                    { label: 'Workplace Safety', value: 68, color: 'bg-cube-amber' },
-                    { label: 'Environment', value: 80, color: 'bg-cube-green' },
-                    { label: 'Quality', value: 65, color: 'bg-cube-amber' },
-                    { label: 'Compliance', value: 70, color: 'bg-cube-green' },
-                    { label: 'Management Systems', value: 60, color: 'bg-cube-red' },
-                  ].map((cat) => (
-                    <div key={cat.label}>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">{cat.label}</span>
-                        <span className="font-medium text-cube-navy">{cat.value}</span>
-                      </div>
-                      <div className="mt-1 h-2 w-full rounded-full bg-white">
-                        <div className={`h-2 rounded-full ${cat.color}`} style={{ width: `${cat.value}%` }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-cube-green" /> Ready</span>
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-cube-amber" /> Attention</span>
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-cube-red" /> Priority</span>
-                </div>
+              <div>
+                <ReportMockup type="scorecard" title="SAMPLE SCORE VIEW" label="DEMONSTRATION ONLY" />
+                <p className="mt-3 text-xs text-muted-foreground/70">{cubeScoreDisclaimer}</p>
               </div>
             }
           />
@@ -210,23 +183,12 @@ export default function CubeScorePage() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="section-standard bg-white scroll-mt-20">
-        <Container>
-          <div className="mb-10 text-center">
-            <Eyebrow className="text-cube-green">HOW IT WORKS</Eyebrow>
-            <SectionHeading className="mt-3" as="h2">How the Score Works</SectionHeading>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step) => (
-              <div key={step.step} className="rounded-lg border border-cube-soft bg-cube-soft p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cube-navy text-sm font-bold text-white">{step.step}</span>
-                <h3 className="mt-4 text-base font-semibold text-cube-navy">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ProcessTimeline
+        eyebrow="HOW IT WORKS"
+        heading="How the Score Works"
+        steps={processSteps.map((s) => ({ title: s.title, description: s.text, icon: s.step === 1 ? 'search' : s.step === 2 ? 'assessment' : s.step === 3 ? 'reports' : 'check' }))}
+        background="white"
+      />
 
       {/* Request form */}
       <section id="request-form" className="section-standard bg-cube-soft scroll-mt-20">
