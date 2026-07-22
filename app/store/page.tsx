@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { siteConfig } from '@/config/site';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
+import { HoneypotField } from '@/components/ui/honeypot';
 import { submitStoreLaunchForm } from '@/lib/actions';
 import { PageHero } from '@/components/ui/visual-sections';
 import { pageImages } from '@/content/images';
@@ -121,6 +122,7 @@ export default function StoreComingSoon() {
                     <FormErrorSummary errors={state.errors} message={state.message} />
                   )}
                   <form ref={formRef} action={formAction} className="mt-8 space-y-5">
+                    <HoneypotField />
                     <div>
                       <Label htmlFor="notify-name">Name <span className="text-cube-critical">*</span></Label>
                       <Input

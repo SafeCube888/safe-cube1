@@ -24,7 +24,7 @@ export const env = {
   turnstileSiteKey: optional('NEXT_PUBLIC_TURNSTILE_SITE_KEY', process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY),
 
   supabaseServiceRoleKey: optional('SUPABASE_SERVICE_ROLE_KEY', process.env.SUPABASE_SERVICE_ROLE_KEY),
-  resendApiKey: optional('RESEND_API_KEY', process.env.RESEND_API_KEY),
+  resendApiKey: optional('RESEND_API_KEY', process.env.RESEND_API_KEY || process.env.RESEND_APIKEY),
   resendFromEmail: optional('RESEND_FROM_EMAIL', process.env.RESEND_FROM_EMAIL, 'noreply@safecube.example'),
   turnstileSecretKey: optional('TURNSTILE_SECRET_KEY', process.env.TURNSTILE_SECRET_KEY),
   adminNotificationEmail: optional('ADMIN_NOTIFICATION_EMAIL', process.env.ADMIN_NOTIFICATION_EMAIL),

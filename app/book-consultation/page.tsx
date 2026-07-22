@@ -9,6 +9,7 @@ import { pageImages } from '@/content/images';
 import { CTADark } from '@/components/ui/cta';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
+import { HoneypotField } from '@/components/ui/honeypot';
 import { submitConsultationForm } from '@/lib/actions';
 
 const consultationTypes = [
@@ -60,6 +61,7 @@ export default function BookConsultationPage() {
           </p>
 
           <form ref={formRef} action={formAction} className="mt-8 space-y-6">
+            <HoneypotField />
             {showErrors && (
               <FormErrorSummary errors={state.errors} message={state.message} />
             )}

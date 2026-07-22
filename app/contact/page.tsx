@@ -20,6 +20,7 @@ import {
   FormSuccessMessage,
 } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
+import { HoneypotField } from '@/components/ui/honeypot';
 import { submitContactForm } from '@/lib/actions';
 import { PageHero } from '@/components/ui/visual-sections';
 import { pageImages } from '@/content/images';
@@ -52,6 +53,7 @@ function ContactForm() {
 
   return (
     <form ref={formRef} action={formAction} className="mt-6 space-y-6">
+      <HoneypotField />
       {showErrors && (
         <FormErrorSummary errors={state.errors} message={state.message} />
       )}

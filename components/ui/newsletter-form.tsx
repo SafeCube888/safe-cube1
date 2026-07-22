@@ -7,6 +7,7 @@ import { TurnstileWidget } from '@/components/ui/turnstile';
 import { turnstileEnabled } from '@/lib/env';
 import { submitNewsletterForm } from '@/lib/actions';
 import type { FormResult } from '@/lib/actions';
+import { HoneypotField } from '@/components/ui/honeypot';
 
 export function NewsletterForm() {
   const [email, setEmail] = useState('');
@@ -53,6 +54,7 @@ export function NewsletterForm() {
         </div>
       )}
       <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+        <HoneypotField />
         <input
           type="email"
           name="email"

@@ -11,6 +11,7 @@ import { cubeScoreDisclaimer } from '@/config/site';
 import { pageImages } from '@/content/images';
 import { useFormAction, FormErrorSummary, FormSuccessMessage } from '@/components/ui/form-action';
 import { TurnstileWidget } from '@/components/ui/turnstile';
+import { HoneypotField } from '@/components/ui/honeypot';
 import { submitCubeScoreForm } from '@/lib/actions';
 
 const scoringCategories = [
@@ -213,6 +214,7 @@ export default function CubeScorePage() {
             </div>
           ) : (
             <form ref={formRef} action={formAction} className="mt-8 space-y-6">
+              <HoneypotField />
               {showErrors && (
                 <FormErrorSummary errors={state.errors} message={state.message} />
               )}

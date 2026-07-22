@@ -15,9 +15,9 @@ Production-ready, multi-page full-stack website for SAFE CUBE, a workplace impro
 | Auth | Supabase Auth |
 | Storage | Supabase Storage |
 | Backend | Supabase Edge Functions (Deno) |
-| Email | Resend (via Edge Functions) |
-| Spam Protection | Cloudflare Turnstile |
-| Deployment | Cloudflare Pages |
+| Email | Resend (via server actions) |
+| Spam Protection | Cloudflare Turnstile + honeypot |
+| Deployment | Netlify (@netlify/plugin-nextjs) |
 
 ## Project Structure
 
@@ -81,21 +81,16 @@ npm run build
 
 ## Deployment
 
-### Cloudflare Pages (Recommended)
+### Netlify (Current Launch Platform)
 
-1. Connect the GitHub repository to Cloudflare Pages.
-2. Set the build command to `npm run build`.
-3. Set the output directory to `.next` (or as directed by the Cloudflare Next.js adapter).
-4. Add all environment variables in the Cloudflare Pages dashboard.
-5. Deploy.
+The project uses `@netlify/plugin-nextjs` for full Next.js App Router support including server actions, SSR, and dynamic routes.
 
-### Cloudflare Workers (Alternative)
+1. Connect the GitHub repository to Netlify.
+2. The `netlify.toml` file configures the build automatically (`npm run build`).
+3. Add all environment variables in the Netlify dashboard (see table above).
+4. Deploy.
 
-For full-stack Next.js with SSR on Cloudflare Workers, use `@opennextjs/cloudflare`:
-
-1. Install the adapter: `npm install @opennextjs/cloudflare`
-2. Configure `wrangler.toml` with the project settings.
-3. Deploy: `npx opennextjs-cloudflare && npx wrangler deploy`
+> **Note:** Cloudflare Workers migration (via `@opennextjs/cloudflare`) is postponed. Cloudflare Pages static deployment must NOT be used — the application requires server-side rendering for server actions.
 
 ## Supabase Setup
 
